@@ -6,7 +6,9 @@ let roundNumber = 0;
 round.innerText = `Round: ${roundNumber}`;
 
 //display high score
-
+let highScore = document.querySelector('#highScore');
+let highScoreNumber = 0
+highScore.innerText = `High Score: ${highScoreNumber}`
 //store pattern and player input
 let funkyArray = [];
 let playerArray = [];
@@ -17,15 +19,24 @@ let reset = document.querySelector('.reset');
 let nextRound = document.querySelector('.nextRound');
 
 reset.addEventListener('click', () => {
-	roundNumber = 0;
+    roundNumber = 0;
+    //remove indicator
+    funkyArray.forEach((num) => {
+			document.getElementById(`${num}`).style.textDecoration = 'none';
+		});
 	funkyArray = [];
     playerArray = [];
+    reset.style.display = 'none'
     play();
 });
 
 nextRound.addEventListener('click', () => {
-	roundNumber++;
     playerArray = [];
+    nextRound.style.display = 'none';
+    //remove indicator
+    funkyArray.forEach((num) => {
+			document.getElementById(`${num}`).style.textDecoration = 'none';
+		});
     play();
 });
 
@@ -77,11 +88,14 @@ function playerInput(e) {
             if (playerArray[n] !== funkyArray[n]) {
                //defeat state button 
                reset.style.display = 'block';
-            }
+               return;
+            } 
             //win round if you get through entire funky array
             n++;
             if (n > funkyArray.length - 1) {
                 nextRound.style.display = 'block';
+                playerTurn = false;
+                return;
             }    
         }
     }
