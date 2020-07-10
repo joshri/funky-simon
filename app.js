@@ -18,7 +18,7 @@ let playerTurn = false;
 let reset = document.querySelector('.reset');
 let nextRound = document.querySelector('.nextRound');
 
-reset.addEventListener('click', () => {
+reset.addEventListener('click', function defeatState() {
     roundNumber = 0;
     //remove indicator
     funkyArray.forEach((num) => {
@@ -30,13 +30,17 @@ reset.addEventListener('click', () => {
     play();
 });
 
-nextRound.addEventListener('click', () => {
+nextRound.addEventListener('click', function winState() {
     playerArray = [];
     nextRound.style.display = 'none';
     //remove indicator
     funkyArray.forEach((num) => {
 			document.getElementById(`${num}`).style.textDecoration = 'none';
-		});
+        });
+    //update High Score
+    if (roundNumber > highScoreNumber) {
+        highScore.innerText = `High Score ${roundNumber}`;
+    }
     play();
 });
 
@@ -49,6 +53,7 @@ start.addEventListener('click', () => {
 
 
 //FUNCTIONS
+
 
 //random between 1 and 5 and store up to roundNumber
 function funkyChoice() {
@@ -80,23 +85,29 @@ window.addEventListener('keydown', playerInput);
 KeyboardEvent.repeat = false;
 
 function playerInput(e) {
+    let n = 0;
     if (playerTurn === true) {
         if (e.key === '1' || '2' || '3' || '4' || '5') {
             playerArray.push(e.key);
             //check for loss every input
-            let n = 0;
+            
             if (playerArray[n] !== funkyArray[n]) {
                //defeat state button 
                reset.style.display = 'block';
                return;
-            } 
+            } else {
             //win round if you get through entire funky array
             n++;
             if (n > funkyArray.length - 1) {
                 nextRound.style.display = 'block';
                 playerTurn = false;
                 return;
-            }    
+                }    
+            }
         }
     }
+}
+
+function checkInput() {
+
 }
