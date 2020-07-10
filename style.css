@@ -1,4 +1,4 @@
-body {
+html {
     font-family: Righteous;
 }
 
@@ -13,7 +13,25 @@ section {
 
 main {
     height: 40vh;
-    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+button {
+    display: none;
+    transition: .5;
+    font-size: 36px;
+    font-family: Righteous;
+    color: rgb(200, 0, 0, 1);
+    border: 5px solid;
+    border-radius: 20px;
+    background: black;
+    padding: 10px;
+}
+
+.start {
+    display: block;
 }
 
 .player {

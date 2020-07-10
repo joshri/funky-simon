@@ -1,47 +1,88 @@
-//start game
-//randomly generated funky sequence into array, add one each round?
-//pause for player input in player array
+//VARS
+
+//display round number
 let round = document.querySelector('#round');
 let roundNumber = 0;
 round.innerText = `Round: ${roundNumber}`;
 
+//display high score
+
+//store pattern and player input
 let funkyArray = [];
 let playerArray = [];
-let playerTurn = true;
+let playerTurn = false;
+
+//pop-up defeat and win notifications
+let reset = document.querySelector('.reset');
+let nextRound = document.querySelector('.nextRound');
+
+reset.addEventListener('click', () => {
+	roundNumber = 0;
+	funkyArray = [];
+    playerArray = [];
+    play();
+});
+
+nextRound.addEventListener('click', () => {
+	roundNumber++;
+    playerArray = [];
+    play();
+});
+
+//start button
+let start = document.querySelector('.start');
+start.addEventListener('click', () => {
+    start.style.display = 'none';
+    play()
+});
+
+
+//FUNCTIONS
 
 //random between 1 and 5 and store up to roundNumber
 function funkyChoice() {
     let choice = Math.floor((Math.random() * 5) + 1);
+    let choiceString = choice.toString();
     while (funkyArray.length < roundNumber) {
-			funkyArray.push(choice);
+			funkyArray.push(choiceString);
 		}
 }
 
-
 //indicate funky choice for each choice in array (pulse for .5 second?), then set playerTurn to true
-// funkyArray.forEach(num => {
-//     document.querySelector([number=`${num}`]).//pulse
-// })
+function displayFunk() {
+funkyArray.forEach(num => {
+    document.getElementById(`${num}`).style.textDecoration = 'underline'
+    });
+playerTurn = true;
+};
 
-//player inputs
+//play
+function play() {
+    roundNumber++;
+    round.innerText = `Round: ${roundNumber}`;
+    funkyChoice();
+    displayFunk();
+}
 
-//enable player input
-//each input tests against funky
-//if wrong, trigger defeat
-//if player array length = funky length, trigger win, increase round
+//enable player input if player turn is true
 window.addEventListener('keydown', playerInput);
+KeyboardEvent.repeat = false;
+
 function playerInput(e) {
     if (playerTurn === true) {
         if (e.key === '1' || '2' || '3' || '4' || '5') {
             playerArray.push(e.key);
+            //check for loss every input
+            let n = 0;
+            if (playerArray[n] !== funkyArray[n]) {
+               //defeat state button 
+               reset.style.display = 'block';
+            }
+            //win round if you get through entire funky array
+            n++;
+            if (n > funkyArray.length - 1) {
+                nextRound.style.display = 'block';
+            }    
         }
     }
-}
-
-function defeatState() {
-
-}
-
-function winState() {
-
 }
