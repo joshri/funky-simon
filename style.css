@@ -1,60 +1,68 @@
 html {
-    font-family: Righteous;
+	font-family: Righteous;
 }
 
 section {
-    height: 30vh;
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: space-evenly;
-    font-size: 96px;
+	height: 30vh;
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: space-evenly;
+	font-size: 96px;
 }
 
 main {
-    height: 40vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+	height: 40vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 button {
-    display: none;
-    transition: .5;
-    font-size: 36px;
-    font-family: Righteous;
-    color: rgb(200, 0, 0, 1);
-    border: 5px solid;
-    border-radius: 20px;
-    background: black;
-    padding: 10px;
+	/* display: none; */
+	font-size: 36px;
+	font-family: Righteous;
+	color: rgb(200, 0, 0, 1);
+	border: 5px solid;
+	border-radius: 20px;
+	background: black;
+	padding: 10px;
 }
 
 .start {
-    display: block;
+	display: block;
 }
 
 .player {
-    height: 20vh;
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    font-size: 24px;
-    
+	height: 20vh;
+	display: flex;
+	justify-content: space-evenly;
+	align-items: center;
+	font-size: 24px;
 }
 footer {
-    display: flex;
-    justify-content: space-evenly;
-    align-items: flex-end;
+	display: flex;
+	justify-content: space-evenly;
+	align-items: flex-end;
 }
 
 a {
-    color: black;
-    text-decoration: none;
-    border: 1px solid black;
-    padding: 5px;
+	color: black;
+	text-decoration: none;
+	border: 1px solid black;
+	padding: 5px;
 }
 
 .pulse {
-    text-decoration: underline;
+    color: #daa520;
+    transition: color .2s;
+}
+
+.playerCue {
+	color: #daa520;
+	font-size: 100px;
+}
+
+.hide {
+    display: none;
 }
