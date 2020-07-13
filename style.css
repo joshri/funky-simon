@@ -16,11 +16,11 @@ main {
 	height: 40vh;
 	display: flex;
 	justify-content: center;
-	align-items: center;
+    align-items: center;
+    z-index: -1;
 }
 
 button {
-	/* display: none; */
 	font-size: 36px;
 	font-family: Righteous;
 	color: rgba(200, 0, 0, 1);
@@ -29,10 +29,12 @@ button {
 	background: black;
     padding: 10px;
     transition: color, border, .5s;
+    position: absolute;
 }
 
 .start {
-	display: block;
+    display: block;
+    z-index: 1;
 }
 
 .player {
@@ -63,14 +65,18 @@ a {
 
 .playerCue {
 	color: #daa520;
-	font-size: 100px;
+    font-size: 100px;
+    --animate-duration: .7s;
 }
 
 .hide {
     display: none;
-    /* color: white;
-    background: white;
-    border: white;
-    transition: color, border .5s;  */
-    
+}
+
+.animate__fadeOut {
+    animation-delay: .2s
+}
+
+.animate__fadeIn {
+    animation-delay: .8s;
 }

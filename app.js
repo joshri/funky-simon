@@ -15,13 +15,6 @@ let funkyArray = [];
 let playerArray = [];
 let playerTurn = false;
 
-//pulse timers
-let show = 800;
-let remove = 600;
-
-//enable player input if player turn is true
-window.addEventListener('keydown', playerInput);
-
 //incrementer that compares funkyArray and playerArray for every input
 let n = 0;
 
@@ -29,44 +22,24 @@ let n = 0;
 let reset = document.querySelector('.reset');
 let nextRound = document.querySelector('.nextRound');
 
-//player cue
+//player cue ('GO')
 let playerCue = document.querySelector('.playerCue');
-
-reset.addEventListener('click', function defeatState() {
-	roundNumber = 0;
-	//remove indicator
-	// funkyArray.forEach((num) => {
-	// 	document.getElementById(`${num}`).classList.remove('pulse');
-	// });
-	funkyArray = [];
-	playerArray = [];
-	reset.classList.add('hide')
-	//reset checker variable
-    n = 0;
-    //reset button text
-    reset.innerText = '';
-    //show start button
-	start.classList.remove('hide');
-});
-
-nextRound.addEventListener('click', function winState() {
-	playerArray = [];
-	nextRound.classList.add('hide');
-	//remove indicator
-	// funkyArray.forEach((num) => {
-	// 	document.getElementById(`${num}`).classList.remove('pulse');
-	// });
-	//update High Score
-	if (roundNumber > highScoreNumber) {
-		highScore.innerText = `High Score ${roundNumber}`;
-	}
-	//reset checker variable
-	n = 0;
-	play();
-});
 
 //start button
 let start = document.querySelector('.start');
+
+//EVENT LISTENERS
+
+//enable player input if player turn is true
+window.addEventListener('keydown', playerInput);
+
+//reset game after loss
+reset.addEventListener('click', defeatState);
+
+//add round after win
+nextRound.addEventListener('click', winState);
+
+//remove start button
 start.addEventListener('click', () => {
 	start.classList.add('hide');
 	play();
@@ -82,21 +55,21 @@ function funkyChoice() {
 }
 
 function displayFunk(funkyArray, i = 0) {
-    //exit display iteration
+	//exit display iteration
 	if (i === funkyArray.length) {
-        playerCue.classList.remove('hide');
-        setTimeout(() => playerCue.classList.add('hide'), remove);
-        //put player input on Timeout to avoid input during GO cue
-		setTimeout(() => playerTurn = true, remove);
+		playerCue.classList.remove('hide');
+		setTimeout(() => playerCue.classList.add('hide'), 800);
+		//put player input on Timeout to avoid input during GO cue
+		setTimeout(() => (playerTurn = true), 600);
 		return;
-    }
-    //cycle through display styling
-    let num = funkyArray[i];
+	}
+	//cycle through display styling
+	let num = funkyArray[i];
 	document.getElementById(`${num}`).classList.add('pulse');
 	setTimeout(() => {
 		document.getElementById(`${num}`).classList.remove('pulse');
-		setTimeout(() => displayFunk(funkyArray, i + 1), remove);
-	}, show);
+		setTimeout(() => displayFunk(funkyArray, i + 1), 600);
+	}, 800);
 }
 
 //play
@@ -109,9 +82,9 @@ function play() {
 
 // player input styling (line 120)
 function playerStyle(key) {
-    let id = `player${key}`;
-    document.getElementById(id).classList.add('pulse');
-    setTimeout(() => document.getElementById(id).classList.remove('pulse'), 500)
+	let id = `player${key}`;
+	document.getElementById(id).classList.add('pulse');
+	setTimeout(() => document.getElementById(id).classList.remove('pulse'), 500);
 }
 
 function playerInput(event) {
@@ -119,24 +92,52 @@ function playerInput(event) {
 		const keys = ['1', '2', '3', '4', '5'];
 		//variable for event key
 		if (keys.indexOf(event.key) !== -1) {
-            playerArray.push(event.key);
-            playerStyle(event.key);
+			playerArray.push(event.key);
+			playerStyle(event.key);
 			//check for loss every input
 			if (playerArray[n] !== funkyArray[n]) {
-                //button text with high score
-                reset.innerText = `THAT WASN\T FUNKY...\nTRY AGAIN?\n HIGH SCORE: ${roundNumber - 1}`
+				//button text with high score
+				reset.innerText = `THAT WASN\T FUNKY...\nTRY AGAIN?\n HIGH SCORE: ${highScoreNumber}`;
 				//defeat state button
-				setTimeout(reset.classList.remove('hide'), show);
+				reset.classList.remove('hide');
 				return;
 			} else {
 				//win round if you get through entire funky array
 				n++;
 				if (n > funkyArray.length - 1) {
-					setTimeout(nextRound.classList.remove('hide'), show);
+					nextRound.classList.remove('hide');
 					playerTurn = false;
 					return;
 				}
 			}
 		}
 	}
+}
+
+function defeatState() {
+	//reset variables
+	roundNumber = 0;
+	funkyArray = [];
+	playerArray = [];
+	//reset checker variable
+	n = 0;
+	//remove button
+	reset.classList.add('hide');
+	//reset button text
+	reset.innerText = '';
+	//show start button
+	start.classList.remove('hide');
+}
+
+function winState() {
+	playerArray = [];
+	nextRound.classList.add('hide');
+	//update High Score
+	if (roundNumber > highScoreNumber) {
+		highScoreNumber = roundNumber;
+		highScore.innerText = `High Score ${highScoreNumber}`;
+	}
+	//reset checker variable
+	n = 0;
+	play();
 }
