@@ -42,7 +42,10 @@ reset.addEventListener('click', function defeatState() {
 	playerArray = [];
 	reset.classList.add('hide')
 	//reset checker variable
-	n = 0;
+    n = 0;
+    //reset button text
+    reset.innerText = '';
+    //show start button
 	start.classList.remove('hide');
 });
 
@@ -104,7 +107,7 @@ function play() {
 	displayFunk(funkyArray);
 }
 
-// player input styling
+// player input styling (line 120)
 function playerStyle(key) {
     let id = `player${key}`;
     document.getElementById(id).classList.add('pulse');
@@ -120,14 +123,16 @@ function playerInput(event) {
             playerStyle(event.key);
 			//check for loss every input
 			if (playerArray[n] !== funkyArray[n]) {
+                //button text with high score
+                reset.innerText = `THAT WASN\T FUNKY...\nTRY AGAIN?\n HIGH SCORE: ${roundNumber - 1}`
 				//defeat state button
-				reset.classList.remove('hide');
+				setTimeout(reset.classList.remove('hide'), show);
 				return;
 			} else {
 				//win round if you get through entire funky array
 				n++;
 				if (n > funkyArray.length - 1) {
-					nextRound.classList.remove('hide');
+					setTimeout(nextRound.classList.remove('hide'), show);
 					playerTurn = false;
 					return;
 				}
