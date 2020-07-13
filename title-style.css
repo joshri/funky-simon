@@ -17,20 +17,68 @@ div {
     
 }
 
+@keyframes background1 {
+    0% {background-color: lime;}
+    25% {background-color: royalblue;}
+    50% {background-color: palevioletred;}
+    75% {background-color: orange;}
+    100% {background-color: lime;}
+}
+
+@keyframes background2 {
+    0% {background-color: royalblue;}
+    25% {background-color: palevioletred;}
+    50% {background-color: orange;}
+    75% {background-color: lime;}
+    100% {background-color: royalblue;}
+}
+
+@keyframes background3 {
+     0% {background-color: palevioletred;}
+    25% {background-color: orange;}
+    50% {background-color: lime;}
+    75% {background-color: royalblue;}
+    100% {background-color: palevioletred;}
+}
+
+@keyframes background4 {
+     0% {background-color: orange;}
+    25% {background-color: lime;}
+    50% {background-color: royalblue;}
+    75% {background-color: palevioletred;}
+    100% {background-color: orange;}
+}
+
 .one {
     background-color: lime;
+    animation-name: background1;
+    animation-duration: 5s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
 }
 
 .two {
-    background-color: cyan;
+    background-color: royalblue;
+    animation-name: background2;
+    animation-duration: 5s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
 }
 
 .three {
-    background-color: palevioletred
+    background-color: palevioletred;
+    animation-name: background3;
+    animation-duration: 5s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
 }
 
 .four {
     background-color: orange;
+    animation-name: background4;
+    animation-duration: 5s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
 }
 
 main {
@@ -46,7 +94,7 @@ h1 {
     justify-content: center;
     align-items: center;
     height: 60vh;
-    font-size: 72px;
+    font-size: 64px;
     color: purple;
     text-decoration: underline;
 }

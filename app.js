@@ -19,16 +19,20 @@ let playerTurn = false;
 let n = 0;
 
 //pop-up defeat and win notifications
-let reset = document.querySelector('.reset');
-let nextRound = document.querySelector('.nextRound');
+const reset = document.querySelector('.reset');
+const nextRound = document.querySelector('.nextRound');
 
 //player cue ('GO')
-let playerCue = document.querySelector('.playerCue');
+const playerCue = document.querySelector('.playerCue');
 
 //start button
-let start = document.querySelector('.start');
+const start = document.querySelector('.start');
 
-//EVENT LISTENERS
+//for background style
+let bgOne = document.querySelectorAll('.one');
+let bgTwo = document.querySelectorAll('.two');
+let bgThree = document.querySelectorAll('.three');
+let bgFour = document.querySelectorAll('.four');
 
 //enable player input if player turn is true
 window.addEventListener('keydown', playerInput);
@@ -42,6 +46,7 @@ nextRound.addEventListener('click', winState);
 //remove start button
 start.addEventListener('click', () => {
 	start.classList.add('hide');
+	showBg(true);
 	play();
 });
 
@@ -84,7 +89,11 @@ function play() {
 function playerStyle(key) {
 	let id = `player${key}`;
 	document.getElementById(id).classList.add('pulse');
-	setTimeout(() => document.getElementById(id).classList.remove('pulse'), 500);
+    setTimeout(() => document.getElementById(id).classList.remove('pulse'), 500);
+    if (key === 1) {
+        document.querySelector('.woah').classList.remove('hide')
+        document.querySelector('.woah').classList.add
+    }
 }
 
 function playerInput(event) {
@@ -96,16 +105,18 @@ function playerInput(event) {
 			playerStyle(event.key);
 			//check for loss every input
 			if (playerArray[n] !== funkyArray[n]) {
+				//remove background
+				showBg(false);
 				//button text with high score
-				reset.innerText = `THAT WASN\T FUNKY...\nTRY AGAIN?\n HIGH SCORE: ${highScoreNumber}`;
+				reset.innerText = `THAT WASN\'T FUNKY...\nTRY AGAIN?\n HIGH SCORE: ${highScoreNumber}`;
 				//defeat state button
-				reset.classList.remove('hide');
+				setTimeout(() => reset.classList.remove('hide'), 1000);
 				return;
 			} else {
 				//win round if you get through entire funky array
 				n++;
 				if (n > funkyArray.length - 1) {
-					nextRound.classList.remove('hide');
+					setTimeout(() => nextRound.classList.remove('hide'), 1000);
 					playerTurn = false;
 					return;
 				}
@@ -114,6 +125,7 @@ function playerInput(event) {
 	}
 }
 
+//for reset button click
 function defeatState() {
 	//reset variables
 	roundNumber = 0;
@@ -129,6 +141,7 @@ function defeatState() {
 	start.classList.remove('hide');
 }
 
+//for nextRound button click
 function winState() {
 	playerArray = [];
 	nextRound.classList.add('hide');
@@ -140,4 +153,35 @@ function winState() {
 	//reset checker variable
 	n = 0;
 	play();
+}
+
+//for background style
+function showBg(x) {
+	if (!x) {
+		bgOne.forEach((x) => {
+			x.style.animationName = '';
+		});
+		bgTwo.forEach((x) => {
+			x.style.animationName = '';
+		});
+		bgThree.forEach((x) => {
+			x.style.animationName = '';
+		});
+		bgFour.forEach((x) => {
+			x.style.animationName = '';
+		});
+	} else {
+		bgOne.forEach((x) => {
+			x.style.animationName = 'background1';
+		});
+		bgTwo.forEach((x) => {
+			x.style.animationName = 'background2';
+		});
+		bgThree.forEach((x) => {
+			x.style.animationName = 'background3';
+		});
+		bgFour.forEach((x) => {
+			x.style.animationName = 'background4';
+		});
+	}
 }

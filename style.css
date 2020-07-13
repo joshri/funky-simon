@@ -2,6 +2,10 @@ html {
 	font-family: Righteous;
 }
 
+body {
+    margin: 0;
+}
+
 section {
 	height: 30vh;
 	display: flex;
@@ -9,19 +13,39 @@ section {
 	align-items: center;
 	justify-content: space-evenly;
     font-size: 96px;
+    line-height: 50px;
     transition: color .2s
+}
+
+span {
+    margin: 0 auto;
+    font-size: 24px;
 }
 
 main {
 	height: 40vh;
-	display: flex;
+    display: flex;
+    flex-direction: column;
 	justify-content: center;
     align-items: center;
-    z-index: -1;
 }
 
 button {
-	font-size: 36px;
+        /* height: 20vh; */
+    font-size: 36px;
+	font-family: Righteous;
+	color: rgba(200, 0, 0, 1);
+	border: 5px solid;
+	border-radius: 20px;
+	background: black;
+    padding: 10px;
+    /* position: absolute; */
+    /* margin-right: 50vw; */
+}
+
+/* .buttons {
+    height: 20vh;
+    	font-size: 36px;
 	font-family: Righteous;
 	color: rgba(200, 0, 0, 1);
 	border: 5px solid;
@@ -30,11 +54,15 @@ button {
     padding: 10px;
     transition: color, border, .5s;
     position: absolute;
-}
+    margin-right: 50vw;
+} */
 
-.start {
-    display: block;
-    z-index: 1;
+.text {
+    height: 20vh;
+    display: flex;
+    flex-direction: column;
+    z-index: -1;
+    position: absolute;
 }
 
 .player {
@@ -48,35 +76,94 @@ button {
 footer {
 	display: flex;
 	justify-content: space-evenly;
-	align-items: flex-end;
+    align-items: center;
 }
 
 a {
 	color: black;
 	text-decoration: none;
 	border: 1px solid black;
-	padding: 5px;
+    padding: 5px;
+}
+
+.player {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-evenly;
+    align-items: center;
+    font-size: 24px;
+    height: 15vh;
+    margin: 20px;
+}
+
+div {
+    text-align: center;
+    align-items: center;
+    justify-content: center;
 }
 
 .pulse {
-    color: #daa520;
+    color: indigo;
     transition: color .2s;
+    text-decoration: underline;
 }
 
 .playerCue {
 	color: #daa520;
     font-size: 100px;
-    --animate-duration: .7s;
 }
 
 .hide {
     display: none;
 }
 
-.animate__fadeOut {
-    animation-delay: .2s
+.bg {
+    display: flex;
+    flex-wrap: wrap;
+    position: absolute;
+    z-index: -1;
+    height:100vh;
+    width: 100vw;
 }
 
-.animate__fadeIn {
-    animation-delay: .8s;
+.one, .two, .three, .four {
+    background-color: white;
+    height:25vh;
+    width:25vw;
+    animation-duration: 5s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+    transition: 
+}
+
+@keyframes background1 {
+    0% {background-color: lime;}
+    25% {background-color: royalblue;}
+    50% {background-color: palevioletred;}
+    75% {background-color: orange;}
+    100% {background-color: lime;}
+}
+
+@keyframes background2 {
+    0% {background-color: royalblue;}
+    25% {background-color: palevioletred;}
+    50% {background-color: orange;}
+    75% {background-color: lime;}
+    100% {background-color: royalblue;}
+}
+
+@keyframes background3 {
+     0% {background-color: palevioletred;}
+    25% {background-color: orange;}
+    50% {background-color: lime;}
+    75% {background-color: royalblue;}
+    100% {background-color: palevioletred;}
+}
+
+@keyframes background4 {
+     0% {background-color: orange;}
+    25% {background-color: lime;}
+    50% {background-color: royalblue;}
+    75% {background-color: palevioletred;}
+    100% {background-color: orange;}
 }
