@@ -79,13 +79,16 @@ function funkyChoice() {
 }
 
 function displayFunk(funkyArray, i = 0) {
+    //exit display iteration
 	if (i === funkyArray.length) {
         playerCue.classList.remove('hide');
         setTimeout(() => playerCue.classList.add('hide'), remove);
-		playerTurn = true;
+        //put player input on Timeout to avoid input during GO cue
+		setTimeout(() => playerTurn = true, remove);
 		return;
-	}
-	let num = funkyArray[i];
+    }
+    //cycle through display styling
+    let num = funkyArray[i];
 	document.getElementById(`${num}`).classList.add('pulse');
 	setTimeout(() => {
 		document.getElementById(`${num}`).classList.remove('pulse');
@@ -101,12 +104,20 @@ function play() {
 	displayFunk(funkyArray);
 }
 
+// player input styling
+function playerStyle(key) {
+    let id = `player${key}`;
+    document.getElementById(id).classList.add('pulse');
+    setTimeout(() => document.getElementById(id).classList.remove('pulse'), 500)
+}
+
 function playerInput(event) {
 	if (playerTurn) {
 		const keys = ['1', '2', '3', '4', '5'];
 		//variable for event key
 		if (keys.indexOf(event.key) !== -1) {
-			playerArray.push(event.key);
+            playerArray.push(event.key);
+            playerStyle(event.key);
 			//check for loss every input
 			if (playerArray[n] !== funkyArray[n]) {
 				//defeat state button
