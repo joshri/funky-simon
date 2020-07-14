@@ -65,6 +65,11 @@ button {
     position: absolute;
 }
 
+.woah, .yeah, .hot, .funky1, .disco {
+    font-size: 200px;
+    color: red;
+}
+
 .player {
     height: 20vh;
 	display: flex;

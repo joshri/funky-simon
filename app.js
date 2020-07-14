@@ -89,11 +89,63 @@ function play() {
 function playerStyle(key) {
 	let id = `player${key}`;
 	document.getElementById(id).classList.add('pulse');
-    setTimeout(() => document.getElementById(id).classList.remove('pulse'), 500);
-    if (key === 1) {
-        document.querySelector('.woah').classList.remove('hide')
-        document.querySelector('.woah').classList.add
-    }
+	setTimeout(() => document.getElementById(id).classList.remove('pulse'), 500);
+	if (key === '1') {
+		document.querySelector('.woah').classList.remove('hide');
+		document
+			.querySelector('.woah')
+			.classList.add('animate__animated', 'animate__rollOut');
+		setTimeout(() => {
+			document.querySelector('.woah').classList.add('hide');
+			document
+				.querySelector('.woah')
+				.classList.remove('animate__animated', 'animate__rollOut');
+		}, 400);
+	} else if (key === '2') {
+		document.querySelector('.yeah').classList.remove('hide');
+		document
+			.querySelector('.yeah')
+			.classList.add('animate__animated', 'animate__flipOutX');
+		setTimeout(() => {
+			document.querySelector('.yeah').classList.add('hide');
+			document
+				.querySelector('.yeah')
+				.classList.remove('animate__animated', 'animate__flipOutX');
+		}, 400);
+	} else if (key === '3') {
+		document.querySelector('.hot').classList.remove('hide');
+		document
+			.querySelector('.hot')
+			.classList.add('animate__animated', 'animate__fadeOutBottomLeft');
+		setTimeout(() => {
+			document.querySelector('.hot').classList.add('hide');
+			document
+				.querySelector('.hot')
+				.classList.remove('animate__animated', 'animate__fadeOutBottomLeft');
+		}, 400);
+	} else if (key === '4') {
+		document.querySelector('.funky1').classList.remove('hide');
+		document
+			.querySelector('.funky1')
+			.classList.add('animate__animated', 'animate__zoomOut');
+		setTimeout(() => {
+			document.querySelector('.funky1').classList.add('hide');
+			document
+				.querySelector('.funky1')
+				.classList.remove('animate__animated', 'animate__zoomOut');
+		}, 400);
+	} else if (key === '5') {
+		document.querySelector('.disco').classList.remove('hide');
+		document
+			.querySelector('.disco')
+			.classList.add('animate__animated', 'animate__rotateOutDownRight');
+		setTimeout(() => {
+			document.querySelector('.disco').classList.add('hide');
+			document
+				.querySelector('.disco')
+				.classList.remove('animate__animated', 'animate__rotateOutDownRight');
+		}, 400);
+	}
 }
 
 function playerInput(event) {
