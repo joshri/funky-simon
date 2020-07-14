@@ -1,3 +1,8 @@
 #current bugs:
-- does not filter out keystrokes other than numbers
-- does not count win bc function resets n value
+fix audio not playing if twice in a row and input faster than clip
+favicon error?!
+
+plans:
+backing track?
+sound effect for button press?
+sound effect for comp input?

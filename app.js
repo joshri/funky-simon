@@ -1,5 +1,14 @@
 //VARS
 
+//audio
+let woah = document.querySelector('#woah');
+let yeah = document.querySelector('#yeah');
+let hot = document.querySelector('#hot');
+let funkyClip = document.querySelector('#funky');
+let disco = document.querySelector('#disco');
+let recordScratch = document.querySelector('#recordScratch');
+let doit = document.querySelector('#doit');
+
 //display round number
 let round = document.querySelector('#round');
 let roundNumber = 0;
@@ -49,6 +58,7 @@ nextRound.addEventListener('click', winState);
 
 //remove start button
 start.addEventListener('click', () => {
+    ow.play()
 	start.classList.add('hide');
 	showBg(true);
 	play();
@@ -66,10 +76,11 @@ function funkyChoice() {
 function displayFunk(funkyArray, i = 0) {
 	//exit display iteration
 	if (i === funkyArray.length) {
+        doit.play();
 		playerCue.classList.remove('hide');
-		setTimeout(() => playerCue.classList.add('hide'), 800);
+		setTimeout(() => playerCue.classList.add('hide'), 500);
 		//put player input on Timeout to avoid input during GO cue
-		setTimeout(() => (playerTurn = true), 600);
+		setTimeout(() => (playerTurn = true), 500);
 		return;
 	}
 	//cycle through display styling
@@ -96,6 +107,9 @@ function playerStyle(key) {
 	document.getElementById(id).classList.add('pulse');
 	setTimeout(() => document.getElementById(id).classList.remove('pulse'), 500);
 	if (key === '1') {
+        //audio
+        woah.play();
+        //animation
 		document.querySelector('.woah').classList.remove('hide');
 		document
 			.querySelector('.woah')
@@ -107,6 +121,7 @@ function playerStyle(key) {
 				.classList.remove('animate__animated', 'animate__rollOut');
 		}, 300);
 	} else if (key === '2') {
+        yeah.play()
 		document.querySelector('.yeah').classList.remove('hide');
 		document
 			.querySelector('.yeah')
@@ -118,6 +133,7 @@ function playerStyle(key) {
 				.classList.remove('animate__animated', 'animate__flipOutX');
 		}, 300);
 	} else if (key === '3') {
+        hot.play();
 		document.querySelector('.hot').classList.remove('hide');
 		document
 			.querySelector('.hot')
@@ -129,6 +145,7 @@ function playerStyle(key) {
 				.classList.remove('animate__animated', 'animate__fadeOutBottomLeft');
 		}, 300);
 	} else if (key === '4') {
+        funkyClip.play();
 		document.querySelector('.funky1').classList.remove('hide');
 		document
 			.querySelector('.funky1')
@@ -140,6 +157,7 @@ function playerStyle(key) {
 				.classList.remove('animate__animated', 'animate__zoomOut');
 		}, 300);
 	} else if (key === '5') {
+        disco.play();
 		document.querySelector('.disco').classList.remove('hide');
 		document
 			.querySelector('.disco')
@@ -163,6 +181,8 @@ function playerInput(event) {
 			playerStyle(event.key);
 			//check for loss every input
 			if (playerArray[n] !== funkyArray[n]) {
+                //audio
+                recordScratch.play();
                 //remove background
                 playerTurn = false;
 				showBg(false);
@@ -186,6 +206,7 @@ function playerInput(event) {
 
 //for reset button click
 function defeatState() {
+    ow.play();
 	//reset variables
 	roundNumber = 0;
 	funkyArray = [];
@@ -202,6 +223,7 @@ function defeatState() {
 
 //for nextRound button click
 function winState() {
+    ow.play();
 	playerArray = [];
 	nextRound.classList.add('hide');
 	//update High Score
