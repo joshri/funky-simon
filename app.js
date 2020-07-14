@@ -8,6 +8,11 @@ let funkyClip = document.querySelector('#funky');
 let disco = document.querySelector('#disco');
 let recordScratch = document.querySelector('#recordScratch');
 let doit = document.querySelector('#doit');
+let comp1 = document.querySelector('#one');
+let comp2 = document.querySelector('#two');
+let comp3 = document.querySelector('#three');
+let comp4 = document.querySelector('#four');
+let comp5 = document.querySelector('#five');
 
 //display round number
 let round = document.querySelector('#round');
@@ -58,7 +63,7 @@ nextRound.addEventListener('click', winState);
 
 //remove start button
 start.addEventListener('click', () => {
-    ow.play()
+	// ow.play();
 	start.classList.add('hide');
 	showBg(true);
 	play();
@@ -76,16 +81,29 @@ function funkyChoice() {
 function displayFunk(funkyArray, i = 0) {
 	//exit display iteration
 	if (i === funkyArray.length) {
-        doit.play();
+		doit.play();
 		playerCue.classList.remove('hide');
 		setTimeout(() => playerCue.classList.add('hide'), 500);
-		//put player input on Timeout to avoid input during GO cue
+		//put player input on Timeout to avoid input during DOIT cue
 		setTimeout(() => (playerTurn = true), 500);
 		return;
 	}
 	//cycle through display styling
 	let num = funkyArray[i];
 	document.getElementById(`${num}`).classList.add('pulse');
+	//audio
+	if (num === '1') {
+		comp1.play();
+	} else if (num === '2') {
+		comp2.play();
+	} else if (num === '3') {
+		comp3.play();
+	} else if (num === '4') {
+		comp4.play();
+	} else if (num === '5') {
+		comp5.play();
+	}
+	//recursive!
 	setTimeout(() => {
 		document.getElementById(`${num}`).classList.remove('pulse');
 		setTimeout(() => displayFunk(funkyArray, i + 1), remove);
@@ -95,21 +113,21 @@ function displayFunk(funkyArray, i = 0) {
 //play
 function play() {
 	roundNumber++;
-    round.innerText = `Round: ${roundNumber}`;
-    speedUpTest();
+	round.innerText = `Round: ${roundNumber}`;
+	speedUpTest();
 	funkyChoice();
 	displayFunk(funkyArray);
 }
 
-// player input styling (line 120)
+// player input styling (part of playerInput below)
 function playerStyle(key) {
 	let id = `player${key}`;
 	document.getElementById(id).classList.add('pulse');
 	setTimeout(() => document.getElementById(id).classList.remove('pulse'), 500);
 	if (key === '1') {
-        //audio
-        woah.play();
-        //animation
+		//audio
+		woah.play();
+		//animation
 		document.querySelector('.woah').classList.remove('hide');
 		document
 			.querySelector('.woah')
@@ -119,9 +137,9 @@ function playerStyle(key) {
 			document
 				.querySelector('.woah')
 				.classList.remove('animate__animated', 'animate__rollOut');
-		}, 300);
+		}, 500);
 	} else if (key === '2') {
-        yeah.play()
+		yeah.play();
 		document.querySelector('.yeah').classList.remove('hide');
 		document
 			.querySelector('.yeah')
@@ -131,9 +149,9 @@ function playerStyle(key) {
 			document
 				.querySelector('.yeah')
 				.classList.remove('animate__animated', 'animate__flipOutX');
-		}, 300);
+		}, 500);
 	} else if (key === '3') {
-        hot.play();
+		hot.play();
 		document.querySelector('.hot').classList.remove('hide');
 		document
 			.querySelector('.hot')
@@ -143,9 +161,9 @@ function playerStyle(key) {
 			document
 				.querySelector('.hot')
 				.classList.remove('animate__animated', 'animate__fadeOutBottomLeft');
-		}, 300);
+		}, 500);
 	} else if (key === '4') {
-        funkyClip.play();
+		funkyClip.play();
 		document.querySelector('.funky1').classList.remove('hide');
 		document
 			.querySelector('.funky1')
@@ -155,9 +173,9 @@ function playerStyle(key) {
 			document
 				.querySelector('.funky1')
 				.classList.remove('animate__animated', 'animate__zoomOut');
-		}, 300);
+		}, 500);
 	} else if (key === '5') {
-        disco.play();
+		disco.play();
 		document.querySelector('.disco').classList.remove('hide');
 		document
 			.querySelector('.disco')
@@ -167,7 +185,7 @@ function playerStyle(key) {
 			document
 				.querySelector('.disco')
 				.classList.remove('animate__animated', 'animate__rotateOutDownRight');
-		}, 300);
+		}, 500);
 	}
 }
 
@@ -181,21 +199,21 @@ function playerInput(event) {
 			playerStyle(event.key);
 			//check for loss every input
 			if (playerArray[n] !== funkyArray[n]) {
-                //audio
-                recordScratch.play();
-                //remove background
-                playerTurn = false;
+				//audio
+				recordScratch.play();
+				//remove background
+				playerTurn = false;
 				showBg(false);
 				//button text with high score
 				reset.innerText = `THAT WASN\'T FUNKY...\nTRY AGAIN?\n HIGH SCORE: ${highScoreNumber}`;
 				//defeat state button
-				setTimeout(() => reset.classList.remove('hide'), 800);
+				setTimeout(() => reset.classList.remove('hide'), 1000);
 				return;
 			} else {
 				//win round if you get through entire funky array
 				n++;
 				if (n > funkyArray.length - 1) {
-					setTimeout(() => nextRound.classList.remove('hide'), 800);
+					setTimeout(() => nextRound.classList.remove('hide'), 500);
 					playerTurn = false;
 					return;
 				}
@@ -206,7 +224,7 @@ function playerInput(event) {
 
 //for reset button click
 function defeatState() {
-    ow.play();
+	ow.play();
 	//reset variables
 	roundNumber = 0;
 	funkyArray = [];
@@ -223,9 +241,8 @@ function defeatState() {
 
 //for nextRound button click
 function winState() {
-    ow.play();
 	playerArray = [];
-	nextRound.classList.add('hide');
+	setTimeout(() => nextRound.classList.add('hide'), 500);
 	//update High Score
 	if (roundNumber > highScoreNumber) {
 		highScoreNumber = roundNumber;
@@ -236,15 +253,12 @@ function winState() {
 	play();
 }
 
-//add difficulty 
+//add difficulty
 function speedUpTest() {
-    if (roundNumber >= 5) {
-        remove = 300;
-        show = 300;
-    } else if (roundNumber >= 10) {
-        remove = 150;
-        show = 150;
-    }
+	 if (roundNumber >= 10) {
+		remove = 250;
+		show = 250;
+	}
 }
 
 //for background style
