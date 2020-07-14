@@ -108,7 +108,7 @@ div {
 }
 
 .pulse {
-    color: indigo;
+    color: red;
     transition: color .2s;
     text-decoration: underline;
 }

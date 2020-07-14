@@ -18,6 +18,10 @@ let playerTurn = false;
 //incrementer that compares funkyArray and playerArray for every input
 let n = 0;
 
+//speed up pulse selector
+let remove = 500;
+let show = 500;
+
 //pop-up defeat and win notifications
 const reset = document.querySelector('.reset');
 const nextRound = document.querySelector('.nextRound');
@@ -73,14 +77,15 @@ function displayFunk(funkyArray, i = 0) {
 	document.getElementById(`${num}`).classList.add('pulse');
 	setTimeout(() => {
 		document.getElementById(`${num}`).classList.remove('pulse');
-		setTimeout(() => displayFunk(funkyArray, i + 1), 600);
-	}, 800);
+		setTimeout(() => displayFunk(funkyArray, i + 1), remove);
+	}, show);
 }
 
 //play
 function play() {
 	roundNumber++;
-	round.innerText = `Round: ${roundNumber}`;
+    round.innerText = `Round: ${roundNumber}`;
+    speedUpTest();
 	funkyChoice();
 	displayFunk(funkyArray);
 }
@@ -100,7 +105,7 @@ function playerStyle(key) {
 			document
 				.querySelector('.woah')
 				.classList.remove('animate__animated', 'animate__rollOut');
-		}, 400);
+		}, 300);
 	} else if (key === '2') {
 		document.querySelector('.yeah').classList.remove('hide');
 		document
@@ -111,7 +116,7 @@ function playerStyle(key) {
 			document
 				.querySelector('.yeah')
 				.classList.remove('animate__animated', 'animate__flipOutX');
-		}, 400);
+		}, 300);
 	} else if (key === '3') {
 		document.querySelector('.hot').classList.remove('hide');
 		document
@@ -122,7 +127,7 @@ function playerStyle(key) {
 			document
 				.querySelector('.hot')
 				.classList.remove('animate__animated', 'animate__fadeOutBottomLeft');
-		}, 400);
+		}, 300);
 	} else if (key === '4') {
 		document.querySelector('.funky1').classList.remove('hide');
 		document
@@ -133,7 +138,7 @@ function playerStyle(key) {
 			document
 				.querySelector('.funky1')
 				.classList.remove('animate__animated', 'animate__zoomOut');
-		}, 400);
+		}, 300);
 	} else if (key === '5') {
 		document.querySelector('.disco').classList.remove('hide');
 		document
@@ -144,10 +149,11 @@ function playerStyle(key) {
 			document
 				.querySelector('.disco')
 				.classList.remove('animate__animated', 'animate__rotateOutDownRight');
-		}, 400);
+		}, 300);
 	}
 }
 
+//decides win or loss and shows .text style
 function playerInput(event) {
 	if (playerTurn) {
 		const keys = ['1', '2', '3', '4', '5'];
@@ -157,18 +163,19 @@ function playerInput(event) {
 			playerStyle(event.key);
 			//check for loss every input
 			if (playerArray[n] !== funkyArray[n]) {
-				//remove background
+                //remove background
+                playerTurn = false;
 				showBg(false);
 				//button text with high score
 				reset.innerText = `THAT WASN\'T FUNKY...\nTRY AGAIN?\n HIGH SCORE: ${highScoreNumber}`;
 				//defeat state button
-				setTimeout(() => reset.classList.remove('hide'), 1000);
+				setTimeout(() => reset.classList.remove('hide'), 800);
 				return;
 			} else {
 				//win round if you get through entire funky array
 				n++;
 				if (n > funkyArray.length - 1) {
-					setTimeout(() => nextRound.classList.remove('hide'), 1000);
+					setTimeout(() => nextRound.classList.remove('hide'), 800);
 					playerTurn = false;
 					return;
 				}
@@ -205,6 +212,17 @@ function winState() {
 	//reset checker variable
 	n = 0;
 	play();
+}
+
+//add difficulty 
+function speedUpTest() {
+    if (roundNumber >= 5) {
+        remove = 300;
+        show = 300;
+    } else if (roundNumber >= 10) {
+        remove = 150;
+        show = 150;
+    }
 }
 
 //for background style

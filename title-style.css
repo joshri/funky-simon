@@ -93,7 +93,7 @@ h1 {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 60vh;
+    height: 40vh;
     font-size: 64px;
     color: purple;
     text-decoration: underline;
@@ -108,4 +108,34 @@ a {
     color: black;
     background: rebeccapurple;
     margin-bottom: 50px;
+}
+
+.modal {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    margin-top: 45vh;
+}
+
+p {
+    z-index: -2;
+    border: 5px solid black;
+    border-radius: 40px;
+    padding: 20px;
+    background: rebeccapurple;
+    position: absolute;
+    justify-content: center;
+    align-items: center;
+}
+
+#close {
+    border: none;
+    border-radius: 40px;
+    padding: 20px;
+    text-decoration: none;
+    font-size: 24px;
+    color: black;
+    background: none;
+    margin: 0 auto;
 }
