@@ -14,7 +14,7 @@ section {
 	justify-content: space-evenly;
     font-size: 96px;
     line-height: 50px;
-    transition: color .2s
+    transition: color .2s;
 }
 
 span {
@@ -31,7 +31,6 @@ main {
 }
 
 button {
-        /* height: 20vh; */
     font-size: 36px;
 	font-family: Righteous;
 	color: rgba(200, 0, 0, 1);
@@ -39,43 +38,29 @@ button {
 	border-radius: 20px;
 	background: black;
     padding: 10px;
-    /* position: absolute; */
-    /* margin-right: 50vw; */
 }
-
-/* .buttons {
-    height: 20vh;
-    	font-size: 36px;
-	font-family: Righteous;
-	color: rgba(200, 0, 0, 1);
-	border: 5px solid;
-	border-radius: 20px;
-	background: black;
-    padding: 10px;
-    transition: color, border, .5s;
-    position: absolute;
-    margin-right: 50vw;
-} */
 
 .text {
     height: 20vh;
     display: flex;
     flex-direction: column;
-    z-index: -1;
+    z-index: 0;
     position: absolute;
 }
 
-.woah, .yeah, .hot, .funky1, .disco {
+.woah, .yeah, .hot, .funky1, .disco, .early, .late {
     font-size: 200px;
     color: red;
 }
 
 .player {
-    height: 20vh;
-	display: flex;
-	justify-content: space-evenly;
-	align-items: center;
-	font-size: 56px;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-evenly;
+    align-items: center;
+    font-size: 24px;
+    height: 15vh;
+    margin: 20px;
 }
 
 footer {
@@ -91,15 +76,7 @@ a {
     padding: 5px;
 }
 
-.player {
-    display: flex;
-    flex-wrap: nowrap;
-    justify-content: space-evenly;
-    align-items: center;
-    font-size: 24px;
-    height: 15vh;
-    margin: 20px;
-}
+
 
 div {
     text-align: center;
@@ -114,8 +91,15 @@ div {
 }
 
 .playerCue {
-	color: #daa520;
-    font-size: 100px;
+    background-color: black;
+    color: red;
+    height: 90px;
+    width: 125px;
+    animation-name: indicator;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
+    z-index: -1;
 }
 
 .hide {
@@ -142,9 +126,9 @@ audio {
     background-color: white;
     height:25vh;
     width:25vw;
-    animation-duration: 5s;
+    animation-duration: 4s;
     animation-iteration-count: infinite;
-    animation-timing-function: linear;
+    animation-timing-function: ease-in-out;
 }
 
 @keyframes background1 {
@@ -177,4 +161,10 @@ audio {
     50% {background-color: royalblue;}
     75% {background-color: palevioletred;}
     100% {background-color: orange;}
+}
+
+@keyframes indicator {
+    0% {border-color: limegreen; color: limegreen; height: 120px; width: 195px;}
+    50% {border-color: red; color: red; height: 90px; width: 155px;}
+    100% {border-color: limegreen; color: limegreen; height: 120px; width: 195px;}
 }
