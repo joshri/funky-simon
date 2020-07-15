@@ -1,5 +1,5 @@
 # WELCOME TO FUNKY SIMON!
-##The Simon you know and love - but FUNKY.
+## The Simon you know and love - but FUNKY.
 
 ## Tools:
 -HTML5
