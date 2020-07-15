@@ -33,12 +33,8 @@ let funkyArray = [];
 let playerArray = [];
 let playerTurn = false;
 
-//incrementer that compares funkyArray and playerArray for every input
+//compares funkyArray and playerArray for every input
 let n = 0;
-
-//pulse selector
-let remove = 500;
-let show = 500;
 
 //Tests player rhythm with Date.now()
 let go = 0;
@@ -88,11 +84,14 @@ function funkyChoice() {
 function displayFunk(funkyArray, i = 0) {
 	//exit display iteration
 	if (i === funkyArray.length) {
-		doit.play();
+        //audio
+        doit.play();
+        //rhythm pulse
 		pressIndicator();
 		//put player input on Timeout to avoid input during DOIT cue
 		setTimeout(() => {
-			playerTurn = true;
+            playerTurn = true;
+            //initial rhythm start
 			go = Date.now();
 		}, 500);
 		return;
@@ -115,27 +114,30 @@ function displayFunk(funkyArray, i = 0) {
 	//recursive!
 	setTimeout(() => {
 		document.getElementById(`${num}`).classList.remove('pulse');
-		setTimeout(() => displayFunk(funkyArray, i + 1), remove);
-	}, show);
+		setTimeout(() => displayFunk(funkyArray, i + 1), 500);
+	}, 500);
 }
 
 //play
 function play() {
+    //reset song
 	funkySong.load();
 	roundNumber++;
-	round.innerText = `Round: ${roundNumber}`;
+    round.innerText = `Round: ${roundNumber}`;
+    //countdown audio
 	comp4.play();
-	setTimeout(() => comp3.play(), 500);
+	setTimeout(() => comp3.play(), 600);
 	setTimeout(() => comp2.play(), 1000);
 	setTimeout(() => doit.play(), 1500);
 	setTimeout(() => {
-		funkySong.play();
+        funkySong.play();
+        //computer goes and triggers player input
 		funkyChoice();
 		displayFunk(funkyArray);
 	}, 2000);
 }
 
-// player input styling (part of playerInput below)
+// MASSIVE player input styling (part of playerInput below)
 function playerStyle(key) {
 	let id = `player${key}`;
 	document.getElementById(id).classList.add('pulse');
@@ -208,6 +210,7 @@ function playerStyle(key) {
 //decides win or loss and shows .text style
 function playerInput(event) {
 	if (playerTurn) {
+        //rhythm
 		input = Date.now();
 		if (input - go < 400) {
 			document.querySelector('.early').classList.remove('hide');
@@ -225,8 +228,9 @@ function playerInput(event) {
 			);
 			lose();
 			return;
-		}
-		go = input + 500;
+        }
+        go = input + 500;
+        //memory
 		const keys = ['1', '2', '3', '4', '5'];
 		//variable for event key
 		if (keys.indexOf(event.key) !== -1) {
@@ -260,7 +264,6 @@ function lose() {
 	recordScratch.play();
 	playerCue.classList.add('hide');
 	playerCue.innerText = 'READY...';
-	//remove background
 	playerTurn = false;
 	showBg(false);
 	//button text with high score
@@ -289,7 +292,7 @@ function defeatState() {
 //for between rounds
 function winState() {
 	playerArray = [];
-	//update High Score5
+	//update High Score
 	if (roundNumber > highScoreNumber) {
 		highScoreNumber = roundNumber;
 		highScore.innerText = `High Score ${highScoreNumber}`;
@@ -301,6 +304,7 @@ function winState() {
 		nextRound.classList.add('hide');
 	}, 1500);
 }
+
 //for background style
 function showBg(x) {
 	if (!x) {
@@ -332,6 +336,7 @@ function showBg(x) {
 	}
 }
 
+//for rhythm guide
 function pressIndicator() {
 	playerCue.classList.remove('hide');
 	setTimeout(() => (playerCue.innerText = 'NOW!'), 500);
