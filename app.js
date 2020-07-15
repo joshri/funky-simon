@@ -124,7 +124,6 @@ function play() {
 	funkySong.load();
 	roundNumber++;
 	round.innerText = `Round: ${roundNumber}`;
-	speedUpTest();
 	comp4.play();
 	setTimeout(() => comp3.play(), 500);
 	setTimeout(() => comp2.play(), 1000);
@@ -302,15 +301,6 @@ function winState() {
 		nextRound.classList.add('hide');
 	}, 1500);
 }
-
-//add difficulty
-function speedUpTest() {
-	if (roundNumber >= 10) {
-		remove = 250;
-		show = 250;
-	}
-}
-
 //for background style
 function showBg(x) {
 	if (!x) {
