@@ -6,14 +6,17 @@ let yeah = document.querySelector('#yeah');
 let hot = document.querySelector('#hot');
 let funkyClip = document.querySelector('#funky');
 let disco = document.querySelector('#disco');
+let ow = document.querySelector('#ow');
 let recordScratch = document.querySelector('#recordScratch');
 let doit = document.querySelector('#doit');
+let dance = document.querySelector('#dance');
 let comp1 = document.querySelector('#one');
 let comp2 = document.querySelector('#two');
 let comp3 = document.querySelector('#three');
 let comp4 = document.querySelector('#four');
 let comp5 = document.querySelector('#five');
-
+let funkySong = document.querySelector('#funkySong');
+funkySong.loop = true;
 //display round number
 let round = document.querySelector('#round');
 let roundNumber = 0;
@@ -63,7 +66,6 @@ nextRound.addEventListener('click', winState);
 
 //remove start button
 start.addEventListener('click', () => {
-	// ow.play();
 	start.classList.add('hide');
 	showBg(true);
 	play();
@@ -112,11 +114,19 @@ function displayFunk(funkyArray, i = 0) {
 
 //play
 function play() {
+	funkySong.load();
 	roundNumber++;
 	round.innerText = `Round: ${roundNumber}`;
 	speedUpTest();
-	funkyChoice();
-	displayFunk(funkyArray);
+	comp4.play();
+	setTimeout(() => comp3.play(), 500);
+	setTimeout(() => comp2.play(), 1000);
+	setTimeout(() => doit.play(), 1500);
+	setTimeout(() => {
+		funkySong.play();
+		funkyChoice();
+		displayFunk(funkyArray);
+	}, 2000);
 }
 
 // player input styling (part of playerInput below)
@@ -163,7 +173,7 @@ function playerStyle(key) {
 				.classList.remove('animate__animated', 'animate__fadeOutBottomLeft');
 		}, 500);
 	} else if (key === '4') {
-		funkyClip.play();
+		dance.play();
 		document.querySelector('.funky1').classList.remove('hide');
 		document
 			.querySelector('.funky1')
@@ -200,6 +210,7 @@ function playerInput(event) {
 			//check for loss every input
 			if (playerArray[n] !== funkyArray[n]) {
 				//audio
+				funkySong.pause();
 				recordScratch.play();
 				//remove background
 				playerTurn = false;
@@ -213,8 +224,12 @@ function playerInput(event) {
 				//win round if you get through entire funky array
 				n++;
 				if (n > funkyArray.length - 1) {
-					setTimeout(() => nextRound.classList.remove('hide'), 500);
-					playerTurn = false;
+					setTimeout(() => {
+						ow.play();
+						nextRound.classList.remove('hide');
+						setTimeout(() => funkyClip.play(), 500);
+						setTimeout(() => funkySong.pause(), 1500);
+					}, 500);
 					return;
 				}
 			}
@@ -239,23 +254,26 @@ function defeatState() {
 	start.classList.remove('hide');
 }
 
-//for nextRound button click
+//for between rounds
 function winState() {
+	playerTurn = false;
 	playerArray = [];
-	setTimeout(() => nextRound.classList.add('hide'), 500);
-	//update High Score
+	//update High Score5
 	if (roundNumber > highScoreNumber) {
 		highScoreNumber = roundNumber;
 		highScore.innerText = `High Score ${highScoreNumber}`;
 	}
 	//reset checker variable
-	n = 0;
-	play();
+    n = 0;
+    play();
+	setTimeout(() => {
+		nextRound.classList.add('hide');
+	}, 1500);
 }
 
 //add difficulty
 function speedUpTest() {
-	 if (roundNumber >= 10) {
+	if (roundNumber >= 10) {
 		remove = 250;
 		show = 250;
 	}
