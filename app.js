@@ -18,6 +18,7 @@ let comp5 = document.querySelector('#five');
 let speedUp = document.querySelector('#speedUp');
 let funkySong = document.querySelector('#funkySong');
 funkySong.loop = true;
+funkySong.volume = .5;
 
 //display round number
 let round = document.querySelector('#round');
@@ -127,7 +128,7 @@ function displayFunk(funkyArray, i = 0) {
 //play
 function play() {
     //reset song
-	// funkySong.load();
+	funkySong.load();
 	// if (roundNumber === 5) {
 	// 	doubleTime();
 	// }
