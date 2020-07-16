@@ -15,6 +15,7 @@ let comp2 = document.querySelector('#two');
 let comp3 = document.querySelector('#three');
 let comp4 = document.querySelector('#four');
 let comp5 = document.querySelector('#five');
+let speedUp = document.querySelector('#speedUp');
 let funkySong = document.querySelector('#funkySong');
 funkySong.loop = true;
 
@@ -39,6 +40,11 @@ let n = 0;
 //Tests player rhythm with Date.now()
 let go = 0;
 let input = 0;
+
+//timeout variable to implement double-time
+let fiveHundo = 500;
+let fourHundo = 400;
+let sixHundo = 600;
 
 //pop-up defeat and win notifications
 const reset = document.querySelector('.reset');
@@ -93,7 +99,7 @@ function displayFunk(funkyArray, i = 0) {
             playerTurn = true;
             //initial rhythm start
 			go = Date.now();
-		}, 500);
+		}, fiveHundo);
 		return;
 	}
 	//cycle through display styling
@@ -114,14 +120,17 @@ function displayFunk(funkyArray, i = 0) {
 	//recursive!
 	setTimeout(() => {
 		document.getElementById(`${num}`).classList.remove('pulse');
-		setTimeout(() => displayFunk(funkyArray, i + 1), 500);
-	}, 500);
+		setTimeout(() => displayFunk(funkyArray, i + 1), fiveHundo);
+	}, fiveHundo);
 }
 
 //play
 function play() {
     //reset song
-	funkySong.load();
+	// funkySong.load();
+	// if (roundNumber === 5) {
+	// 	doubleTime();
+	// }
 	roundNumber++;
     round.innerText = `Round: ${roundNumber}`;
     //countdown audio
@@ -141,7 +150,7 @@ function play() {
 function playerStyle(key) {
 	let id = `player${key}`;
 	document.getElementById(id).classList.add('pulse');
-	setTimeout(() => document.getElementById(id).classList.remove('pulse'), 500);
+	setTimeout(() => document.getElementById(id).classList.remove('pulse'), fiveHundo);
 	if (key === '1') {
 		//audio
 		woah.play();
@@ -155,7 +164,7 @@ function playerStyle(key) {
 			document
 				.querySelector('.woah')
 				.classList.remove('animate__animated', 'animate__rollOut');
-		}, 500);
+		}, fiveHundo);
 	} else if (key === '2') {
 		yeah.play();
 		document.querySelector('.yeah').classList.remove('hide');
@@ -167,7 +176,7 @@ function playerStyle(key) {
 			document
 				.querySelector('.yeah')
 				.classList.remove('animate__animated', 'animate__flipOutX');
-		}, 500);
+		}, fiveHundo);
 	} else if (key === '3') {
 		hot.play();
 		document.querySelector('.hot').classList.remove('hide');
@@ -179,7 +188,7 @@ function playerStyle(key) {
 			document
 				.querySelector('.hot')
 				.classList.remove('animate__animated', 'animate__fadeOutBottomLeft');
-		}, 500);
+		}, fiveHundo);
 	} else if (key === '4') {
 		dance.play();
 		document.querySelector('.funky1').classList.remove('hide');
@@ -191,7 +200,7 @@ function playerStyle(key) {
 			document
 				.querySelector('.funky1')
 				.classList.remove('animate__animated', 'animate__zoomOut');
-		}, 500);
+		}, fiveHundo);
 	} else if (key === '5') {
 		disco.play();
 		document.querySelector('.disco').classList.remove('hide');
@@ -203,7 +212,7 @@ function playerStyle(key) {
 			document
 				.querySelector('.disco')
 				.classList.remove('animate__animated', 'animate__rotateOutDownRight');
-		}, 500);
+		}, fiveHundo);
 	}
 }
 
@@ -212,24 +221,24 @@ function playerInput(event) {
 	if (playerTurn) {
         //rhythm
 		input = Date.now();
-		if (input - go < 400) {
+		if (input - go < fourHundo) {
 			document.querySelector('.early').classList.remove('hide');
 			setTimeout(
 				() => document.querySelector('.early').classList.add('hide'),
-				500
+				fiveHundo
 			);
 			lose();
 			return;
-		} else if (input - go > 600) {
+		} else if (input - go > sixHundo) {
 			document.querySelector('.late').classList.remove('hide');
 			setTimeout(
 				() => document.querySelector('.late').classList.add('hide'),
-				500
+				fiveHundo
 			);
 			lose();
 			return;
         }
-        go = input + 500;
+        go = input + fiveHundo;
         //memory
 		const keys = ['1', '2', '3', '4', '5'];
 		//variable for event key
@@ -249,9 +258,9 @@ function playerInput(event) {
 					setTimeout(() => {
 						ow.play();
 						nextRound.classList.remove('hide');
-						setTimeout(() => funkyClip.play(), 500);
+						setTimeout(() => funkyClip.play(), fiveHundo);
 						setTimeout(() => funkySong.pause(), 1500);
-					}, 500);
+					}, fiveHundo);
 					return;
 				}
 			}
@@ -339,5 +348,13 @@ function showBg(x) {
 //for rhythm guide
 function pressIndicator() {
 	playerCue.classList.remove('hide');
-	setTimeout(() => (playerCue.innerText = 'NOW!'), 500);
+	setTimeout(() => (playerCue.innerText = 'NOW!'), fiveHundo);
+}
+
+//for double time
+function doubleTime() {
+		fiveHundo = 250;
+		fourHundo = 150;
+		sixHundo = 350;
+		speedUp.play();
 }

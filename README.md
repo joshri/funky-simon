@@ -34,8 +34,9 @@
 ### Bugs:
 - Animations/audio can sometimes be out of sync due to the browser loading speed(?)
 - the way rhythm checker increments each beat is based on player input, which can lead to an early or late trigger over time that is unfair
-### Fixes:
+### Fixes/Plans:
 - Balance audio levels in-game across the board. 
+- Double-time mode starting at round five
 - Better styling on soundboard, and add more clips?
 - soundboard clips should be able to cut themselves off to play again.
 - Refactor animations and audio into a massive object called Style to make actual game code easier to read. 
