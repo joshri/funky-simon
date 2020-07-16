@@ -1,0 +1,111 @@
+body {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-wrap: wrap;
+    font-family: Righteous;
+    color: black;
+    background: rebeccapurple;
+}
+
+h1 {
+    font-size: 60px;
+    margin: 5px;
+    padding: 5px;
+}
+
+h2 {
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    border: none;
+}
+
+.bg {
+    display: flex;
+    flex-wrap: wrap;
+    position: absolute;
+    z-index: -1;
+    width: fit-content;
+    height: max-content;
+}
+
+button {
+    font-family: Righteous;
+    font-size: 24px;
+	color: rgba(200, 0, 0, 1);
+	border: 5px solid;
+	border-radius: 20px;
+	background: black;
+    padding: 10px;
+    margin: 2%;
+    margin-top: 0;
+}
+
+audio {
+    position: absolute;
+    opacity: 0;
+} 
+
+#funkySong {
+    position: relative;
+    margin: 0px;
+    margin-top: 5px;
+    opacity: 1;
+    width: 30vw;
+}
+
+.sounds {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    height: 70vh;
+}
+
+a {
+	color: black;
+	text-decoration: none;
+	border: 1px solid black;
+    padding: 5px;
+}
+
+.one, .two, .three, .four {
+    height:25vh;
+    width:25vw;
+    animation-duration: 4s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
+}
+
+@keyframes background1 {
+    0% {background-color: lime;}
+    25% {background-color: royalblue;}
+    50% {background-color: palevioletred;}
+    75% {background-color: orange;}
+    100% {background-color: lime;}
+}
+
+@keyframes background2 {
+    0% {background-color: royalblue;}
+    25% {background-color: palevioletred;}
+    50% {background-color: orange;}
+    75% {background-color: lime;}
+    100% {background-color: royalblue;}
+}
+
+@keyframes background3 {
+     0% {background-color: palevioletred;}
+    25% {background-color: orange;}
+    50% {background-color: lime;}
+    75% {background-color: royalblue;}
+    100% {background-color: palevioletred;}
+}
+
+@keyframes background4 {
+     0% {background-color: orange;}
+    25% {background-color: lime;}
+    50% {background-color: royalblue;}
+    75% {background-color: palevioletred;}
+    100% {background-color: orange;}
+}

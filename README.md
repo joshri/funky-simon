@@ -2,15 +2,15 @@
 ## The Simon you know and love - but FUNKY.
 
 ## Tools:
--HTML5
--CSS
--Javascript 
--VSCode
--GarageBand
--Audacity
--Animate.css animation library
--favicon.io fav icon
--funk
+- HTML5
+- CSS
+- Javascript 
+- VSCode
+- GarageBand
+- Audacity
+- Animate.css animation library
+- favicon.io for fav icon
+- funk
 
 ## Method:
 #### I started by chopping up the game functionality into four pieces:
@@ -33,12 +33,14 @@
 ## Known bugs/future fixes:
 ### Bugs:
 - Animations/audio can sometimes be out of sync due to the browser loading speed(?)
+- the way rhythm checker increments each beat is based on player input, which can lead to an early or late trigger over time that is unfair
 ### Fixes:
 - Balance audio levels in-game across the board. 
+- Better styling on soundboard, and add more clips?
+- soundboard clips should be able to cut themselves off to play again.
 - Refactor animations and audio into a massive object called Style to make actual game code easier to read. 
-- Add a Funky Freestyle Soundboard?!
 
-It is incredibly hard to get this far into the song in the actual game mode...but if you just keep it going on the title screen...you are in for some incredible vocals
+If you haven't listened to the lyrics to Funky Simon...just skip ahead in the song and enjoy.
 
 Initial Wireframe:
 https://docs.google.com/document/d/12Q4g98kwNsW2IQPVzMzFTmfcyVmNkTFsu6BOHMTJok8/edit?usp=sharing
