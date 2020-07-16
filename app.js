@@ -42,7 +42,7 @@ let n = 0;
 let go = 0;
 let input = 0;
 
-//timeout variable to implement double-time
+//timeout variable to implement double-time --future update
 let fiveHundo = 500;
 let fourHundo = 400;
 let sixHundo = 600;
@@ -129,6 +129,7 @@ function displayFunk(funkyArray, i = 0) {
 function play() {
     //reset song
 	funkySong.load();
+	//for speed up - future update
 	// if (roundNumber === 5) {
 	// 	doubleTime();
 	// }

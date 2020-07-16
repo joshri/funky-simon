@@ -34,12 +34,15 @@
 ### Bugs:
 - Animations/audio can sometimes be out of sync due to the browser loading speed(?)
 - the way rhythm checker increments each beat is based on player input, which can lead to an early or late trigger over time that is unfair
+- the late indicator waits to check for player input, so you can actually just wait forever and softlock the game. It should be able to check once 500 milliseconds have past to trigger late cue.
+
 ### Fixes/Plans:
-- Balance audio levels in-game across the board. 
-- Double-time mode starting at round five
+- Balance audio levels in-game across the board - especially 'yeah' and 'hot' are too low 
+- Double-time mode for difficulty?
 - Better styling on soundboard, and add more clips?
 - soundboard clips should be able to cut themselves off to play again.
 - Refactor animations and audio into a massive object called Style to make actual game code easier to read. 
+- title screen animation + resetting background pulse animation/adding new one to fit with music.
 
 If you haven't listened to the lyrics to Funky Simon...just skip ahead in the song and enjoy.
 
