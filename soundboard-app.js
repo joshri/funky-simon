@@ -35,10 +35,10 @@ window.addEventListener('keydown', soundboardInput);
 
 function soundboardInput(event) {
 if (soundboard[event.key]) {
+    soundboard[event.key].load();
     soundboard[event.key].play();
 }
 }
-
 
 document
 	.querySelectorAll('.one')
