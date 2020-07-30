@@ -83,7 +83,7 @@ start.addEventListener('click', () => {
 
 //random between 1 and 5 and store up to roundNumber
 function funkyChoice() {
-	let choice = Math.floor(Math.random() * 5 + 1);
+	let choice = Math.floor(Math.random() * 5) + 1;
 	let choiceString = choice.toString();
 	funkyArray.push(choiceString);
 }
